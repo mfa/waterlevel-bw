@@ -66,7 +66,7 @@ async def download():
                     "highest_navigable_waterlevel": await columns[8].inner_text(),
                     "navigable_code": await get_code(columns[8]),
                 }
-                fp.write(json.dumps(data) + "\n")
+                fp.write(json.dumps(data, ensure_ascii=False) + "\n")
 
         await page.pause()
         await browser.close()
