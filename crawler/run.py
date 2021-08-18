@@ -26,11 +26,13 @@ async def download():
 
         crawling_time = await page.query_selector("#ID-ZP")
         dt = await crawling_time.inner_html()
-        dt = dt.replace("MESZ", "CEST").replace("MEZ", "CET")
+        dt_tz = dt.split(" ")[-1]
+        # remove timezone form datetime
+        dt = " ".join(dt.split()[:-1])
         fn = (
-            datetime.datetime.strptime(dt, "%d.%m.%Y %H:%M %Z").isoformat()
-            + " "
-            + dt.split(" ")[-1]
+            datetime.datetime.strptime(dt, "%d.%m.%Y %H:%M").isoformat()
+            + "_"
+            + dt_tz  # readd timezone
         )
         fn = path / (fn + ".jsonl")
 
