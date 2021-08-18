@@ -2,7 +2,6 @@
 name: Scrape latest data
 
 on:
-  push:
   workflow_dispatch:
   schedule:
     - cron: '1,16,31,46 * * * *'
