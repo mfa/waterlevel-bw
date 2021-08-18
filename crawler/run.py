@@ -68,7 +68,6 @@ async def download():
                 }
                 fp.write(json.dumps(data, ensure_ascii=False) + "\n")
 
-        await page.pause()
         await browser.close()
 
 
