@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r crawler/requirements.txt
           python -m playwright install
       - name: Fetch latest data
         run: |-
