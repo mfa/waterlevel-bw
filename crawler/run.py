@@ -21,19 +21,16 @@ async def download():
         page = await browser.new_page()
         await page.goto("https://www.hvz.baden-wuerttemberg.de/overview.html")
 
-        path = Path("data")
-        path.mkdir(exist_ok=True)
-
         crawling_time = await page.query_selector("#ID-ZP")
         dt = await crawling_time.inner_html()
         dt_tz = dt.split(" ")[-1]
         # remove timezone form datetime
-        dt = " ".join(dt.split()[:-1])
-        fn = (
-            datetime.datetime.strptime(dt, "%d.%m.%Y %H:%M").isoformat()
-            + "_"
-            + dt_tz  # readd timezone
-        )
+        _dt = " ".join(dt.split()[:-1])
+        dt = datetime.datetime.strptime(_dt, "%d.%m.%Y %H:%M")
+
+        path = Path(f"data/{dt.year}/{dt.month:02}/{dt.day:02}")
+        path.mkdir(exist_ok=True, parents=True)
+        fn = dt.isoformat() + "_" + dt_tz  # readd timezone
         fn = path / (fn + ".jsonl")
 
         result = await page.query_selector("#ID-TABLE")
