@@ -11,3 +11,6 @@ python -m playwright install
 
 ### run
 
+```
+python run.py
+```
