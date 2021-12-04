@@ -24,7 +24,7 @@ async def download():
         crawling_time = await page.query_selector("#ID-ZP")
         dt = await crawling_time.inner_html()
         dt_tz = dt.split(" ")[-1]
-        # remove timezone form datetime
+        # remove timezone from datetime
         _dt = " ".join(dt.split()[:-1])
         dt = datetime.datetime.strptime(_dt, "%d.%m.%Y %H:%M")
 
